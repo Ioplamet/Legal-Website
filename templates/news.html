@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Новости — {{ site.SITE_TITLE }}{% endblock %}
+{% block nav_news %}text-white{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HEADER -->
+<section class="bg-surface pt-16 pb-14">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="text-gold text-xs font-semibold tracking-widest2 uppercase mb-3">Актуально</p>
+    <h1 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Новости и статьи</h1>
+    <p class="text-gray-400 mt-3 text-base max-w-lg leading-relaxed">
+      Изменения в законодательстве, разъяснения по банковским блокировкам и практические советы.
+    </p>
+  </div>
+</section>
+<div class="gold-rule"></div>
+
+<!-- NEWS LIST -->
+<section class="bg-light py-20">
+  <div class="max-w-6xl mx-auto px-6">
+    {% if news %}
+      <div class="flex flex-col gap-px bg-gray-200">
+        {% for item in news %}
+        <a href="/news/{{ item.id }}"
+           class="group bg-white p-8 flex flex-col sm:flex-row sm:items-start gap-6 hover:bg-light transition-colors">
+
+          <!-- Date column -->
+          <div class="sm:w-32 flex-shrink-0">
+            <time class="text-xs font-semibold text-muted tracking-wide uppercase">
+              {{ item.created_at.strftime('%d.%m.%Y') }}
+            </time>
+          </div>
+
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <h2 class="text-base font-semibold text-gray-900 group-hover:text-gold transition-colors leading-snug mb-2">
+              {{ item.title }}
+            </h2>
+            <p class="text-sm text-gray-500 leading-relaxed line-clamp-2">
+              {{ item.content[:200] }}{% if item.content|length > 200 %}…{% endif %}
+            </p>
+          </div>
+
+          <!-- Arrow -->
+          <div class="flex-shrink-0 self-center">
+            <svg class="w-4 h-4 text-gray-300 group-hover:text-gold transition-colors" fill="none"
+                 stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </div>
+
+        </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="text-center py-24">
+        <p class="text-gray-400 text-sm">Публикаций пока нет. Загляните позже.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section class="bg-card border-y border-border py-14">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+    <div>
+      <p class="text-white font-semibold text-lg">Нужна консультация по конкретной ситуации?</p>
+      <p class="text-gray-500 text-sm mt-1">Расскажите о своём вопросе — ответим бесплатно.</p>
+    </div>
+    <a href="/#contact"
+       class="flex-shrink-0 inline-flex items-center gap-2 bg-gold hover:bg-gold-d text-white font-semibold text-sm px-7 py-3 transition-colors">
+      Оставить заявку
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+{% endblock %}

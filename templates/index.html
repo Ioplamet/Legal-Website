@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+{% block title %}{{ site.SITE_TITLE }}{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="bg-surface text-white pt-24 pb-20 md:pt-32 md:pb-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="text-gold text-xs font-semibold tracking-widest2 uppercase mb-6">
+      Юридическая защита в финансовых вопросах
+    </p>
+    <h1 class="text-4xl md:text-6xl font-bold leading-tight tracking-tight max-w-3xl mb-6">
+      Когда банк блокирует<br class="hidden md:block"/>
+      счёт — мы открываем<br class="hidden md:block"/>
+      путь к решению.
+    </h1>
+    <p class="text-gray-400 text-lg max-w-xl leading-relaxed mb-10">
+      FinJust специализируется на снятии банковских ограничений,
+      защите по 115-ФЗ и 161-ФЗ, налоговых спорах и судебном
+      сопровождении финансовых дел.
+    </p>
+    <div class="flex flex-wrap gap-4">
+      <a href="#contact"
+         class="inline-flex items-center gap-2 bg-gold hover:bg-gold-d text-white font-semibold px-8 py-3.5 text-sm transition-colors">
+        Бесплатная консультация
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+      <a href="#services"
+         class="inline-flex items-center gap-2 border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white font-semibold px-8 py-3.5 text-sm transition-colors">
+        Наши услуги
+      </a>
+    </div>
+
+    {% if request.query_params.get('sent') %}
+    <div class="mt-8 inline-flex items-center gap-3 bg-green-900/40 border border-green-700/50 text-green-300 text-sm px-5 py-3">
+      <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+      </svg>
+      Заявка принята. Свяжемся с вами в течение рабочего дня.
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+
+<!-- METRICS -->
+<section class="bg-card border-y border-border">
+  <div class="max-w-6xl mx-auto px-6 py-14 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border">
+    <div class="flex flex-col items-center sm:items-start px-0 sm:px-10 sm:first:pl-0 sm:last:pr-0 py-8 sm:py-0">
+      <span class="text-5xl md:text-6xl font-bold text-white tracking-tight">10</span>
+      <span class="text-muted text-sm mt-2 leading-snug">лет успешной<br/>юридической практики</span>
+    </div>
+    <div class="flex flex-col items-center sm:items-start px-0 sm:px-10 py-8 sm:py-0">
+      <span class="text-5xl md:text-6xl font-bold text-white tracking-tight">200</span>
+      <span class="text-muted text-sm mt-2 leading-snug">консультаций<br/>в месяц</span>
+    </div>
+    <div class="flex flex-col items-center sm:items-start px-0 sm:px-10 sm:first:pl-0 sm:last:pr-0 py-8 sm:py-0">
+      <span class="text-5xl md:text-6xl font-bold text-white tracking-tight">1342</span>
+      <span class="text-muted text-sm mt-2 leading-snug">успешных дел,<br/>проведённых специалистами</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- SERVICES -->
+<section id="services" class="bg-light py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-14">
+      <p class="text-gold text-xs font-semibold tracking-widest2 uppercase mb-3">Область экспертизы</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight max-w-xl">
+        Специализируемся на финансовом праве
+      </h2>
+      <p class="text-gray-500 mt-3 max-w-lg text-base leading-relaxed">
+        Решаем проблемы с банковскими ограничениями и защищаем клиентов в финансовых спорах любой сложности.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-gray-200">
+      {% for s in services %}
+      <div class="service-card bg-white p-8 flex flex-col gap-4">
+        <div class="w-9 h-9 flex items-center justify-center bg-amber-50">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <h3 class="text-base font-semibold text-gray-900 leading-snug">{{ s.title }}</h3>
+        <p class="text-gray-500 text-sm leading-relaxed flex-1">{{ s.description }}</p>
+        {% if s.price %}
+        <p class="text-gold text-xs font-semibold">{{ s.price }}</p>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- ADVANTAGES -->
+<section id="advantages" class="bg-surface py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-14">
+      <p class="text-gold text-xs font-semibold tracking-widest2 uppercase mb-3">Наши преимущества</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight max-w-xl">
+        Клиенты доверяют нам в самых сложных вопросах
+      </h2>
+      <p class="text-gray-500 mt-3 max-w-lg text-base leading-relaxed">
+        Потому что знают: мы поможем снизить риски и найти законное решение проблемы.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
+
+      <div class="adv-card bg-card p-8">
+        <div class="w-10 h-10 border border-gold flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+          </svg>
+        </div>
+        <h3 class="text-white font-semibold text-sm mb-2">Годы практики</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Все специалисты имеют опыт юридической практики не менее 10 лет в сфере финансового и банковского права.</p>
+      </div>
+
+      <div class="adv-card bg-card p-8">
+        <div class="w-10 h-10 border border-gold flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+        </div>
+        <h3 class="text-white font-semibold text-sm mb-2">Конфиденциальность</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">В начале работы заключаем договор о неразглашении. Ваша частная информация не покидает пределов нашего офиса.</p>
+      </div>
+
+      <div class="adv-card bg-card p-8">
+        <div class="w-10 h-10 border border-gold flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+          </svg>
+        </div>
+        <h3 class="text-white font-semibold text-sm mb-2">Персональный подход</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Индивидуальная работа с каждым клиентом позволяет нам решать даже самые сложные и нестандартные проблемы.</p>
+      </div>
+
+      <div class="adv-card bg-card p-8">
+        <div class="w-10 h-10 border border-gold flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+          </svg>
+        </div>
+        <h3 class="text-white font-semibold text-sm mb-2">Реальные результаты</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Восстанавливаем доступ к счетам, снимаем ограничения и защищаем интересы клиентов в суде и вне его.</p>
+      </div>
+
+      <div class="adv-card bg-card p-8">
+        <div class="w-10 h-10 border border-gold flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="text-white font-semibold text-sm mb-2">Глубокая экспертиза</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Знаем, как добросовестным гражданам восстановить доступ к счетам и снять банковские ограничения законным путём.</p>
+      </div>
+
+      <div class="adv-card bg-card p-8">
+        <div class="w-10 h-10 border border-gold flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-white font-semibold text-sm mb-2">Прозрачное ценообразование</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Фиксированные цены на стандартные услуги. Вы всегда знаете, за что платите — никаких скрытых платежей.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact" class="bg-white py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+      <div>
+        <p class="text-gold text-xs font-semibold tracking-widest2 uppercase mb-3">Свяжитесь с нами</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-4">
+          Получите профессиональную консультацию
+        </h2>
+        <p class="text-gray-500 text-base leading-relaxed mb-10">
+          Оставьте заявку — перезвоним в течение рабочего дня. Первичная консультация по телефону бесплатна.
+        </p>
+        <div class="flex flex-col gap-7">
+          <div>
+            <p class="text-gray-400 text-xs font-semibold tracking-widest2 uppercase mb-1">Телефон</p>
+            <a href="tel:{{ site.LAWYER_PHONE }}"
+               class="text-gray-900 font-semibold text-lg hover:text-gold transition-colors">
+              {{ site.LAWYER_PHONE }}
+            </a>
+          </div>
+          <div>
+            <p class="text-gray-400 text-xs font-semibold tracking-widest2 uppercase mb-1">Email</p>
+            <a href="mailto:{{ site.LAWYER_EMAIL }}"
+               class="text-gray-900 font-semibold hover:text-gold transition-colors">
+              {{ site.LAWYER_EMAIL }}
+            </a>
+          </div>
+          <div>
+            <p class="text-gray-400 text-xs font-semibold tracking-widest2 uppercase mb-1">Адрес</p>
+            <p class="text-gray-700 font-medium">{{ site.LAWYER_ADDRESS }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-light p-8 md:p-10">
+        <form method="post" action="/request" class="flex flex-col gap-5">
+          <div>
+            <label class="text-gray-600 text-xs font-semibold tracking-widest2 uppercase mb-2 block">Ваше имя</label>
+            <input type="text" name="name" required
+                   class="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gold transition-colors"
+                   placeholder="Иван Иванов" />
+          </div>
+          <div>
+            <label class="text-gray-600 text-xs font-semibold tracking-widest2 uppercase mb-2 block">Телефон</label>
+            <input type="tel" name="phone" required
+                   class="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gold transition-colors"
+                   placeholder="+7 (___) ___-__-__" />
+          </div>
+          <div>
+            <label class="text-gray-600 text-xs font-semibold tracking-widest2 uppercase mb-2 block">Опишите ситуацию</label>
+            <textarea name="message" rows="4"
+                      class="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gold transition-colors resize-none"
+                      placeholder="Кратко — что произошло и какая помощь нужна"></textarea>
+          </div>
+          <button type="submit"
+                  class="w-full bg-gold hover:bg-gold-d text-white font-semibold text-sm py-3.5 transition-colors flex items-center justify-center gap-2">
+            Отправить заявку
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </button>
+          <p class="text-gray-400 text-xs text-center leading-relaxed">
+            Нажимая кнопку, вы соглашаетесь на обработку персональных данных
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

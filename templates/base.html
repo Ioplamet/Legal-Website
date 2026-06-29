@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}{{ site.SITE_TITLE }}{% endblock %}</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            surface:  '#0f1117',
+            card:     '#1a1d23',
+            border:   '#2a2d35',
+            gold:     '#c9a84c',
+            'gold-d': '#a8893a',
+            muted:    '#6b7280',
+            light:    '#f5f5f0',
+          },
+          letterSpacing: { widest2: '0.18em' },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .gold-rule { height: 1px; background: #c9a84c; }
+    .service-card { transition: transform 0.22s ease, box-shadow 0.22s ease; }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.13); }
+    .adv-card { transition: background 0.2s ease; }
+    .adv-card:hover { background: #1f2330; }
+    *:focus-visible { outline: 2px solid #c9a84c; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      .service-card, .adv-card { transition: none; }
+    }
+  </style>
+
+  {% block head %}{% endblock %}
+</head>
+
+<body class="font-sans bg-white text-gray-900 antialiased">
+
+<!-- NAV -->
+<header class="bg-surface sticky top-0 z-50">
+  <div class="gold-rule"></div>
+  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/" class="text-white font-bold text-xl tracking-tight">
+      Fin<span class="text-gold">Just</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+      <li><a href="/#services"    class="hover:text-white transition-colors">Услуги</a></li>
+      <li><a href="/#advantages" class="hover:text-white transition-colors">О нас</a></li>
+      <li><a href="/news"        class="hover:text-white transition-colors {% block nav_news %}{% endblock %}">Новости</a></li>
+      <li><a href="/faq"         class="hover:text-white transition-colors {% block nav_faq %}{% endblock %}">FAQ</a></li>
+    </ul>
+
+    <a href="/#contact"
+       class="hidden md:inline-flex items-center gap-2 bg-gold hover:bg-gold-d text-white text-sm font-semibold px-5 py-2 transition-colors">
+      Получить консультацию
+    </a>
+
+    <button id="burger" class="md:hidden text-gray-400 hover:text-white" aria-label="Меню">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden md:hidden border-t border-border">
+    <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium text-gray-400">
+      <li><a href="/#services"    class="hover:text-white">Услуги</a></li>
+      <li><a href="/#advantages" class="hover:text-white">О нас</a></li>
+      <li><a href="/news"        class="hover:text-white">Новости</a></li>
+      <li><a href="/faq"         class="hover:text-white">FAQ</a></li>
+      <li>
+        <a href="/#contact"
+           class="inline-block bg-gold hover:bg-gold-d text-white text-sm font-semibold px-5 py-2 transition-colors">
+          Получить консультацию
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+{% block content %}{% endblock %}
+
+<!-- FOOTER -->
+<footer class="bg-surface text-gray-500">
+  <div class="gold-rule"></div>
+  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+    <div>
+      <a href="/" class="text-white font-bold text-lg tracking-tight">
+        Fin<span class="text-gold">Just</span>
+      </a>
+      <p class="text-xs text-gray-500 mt-1">Юридическая поддержка в финансовых вопросах</p>
+    </div>
+    <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+      <a href="/#services"    class="hover:text-white transition-colors">Услуги</a>
+      <a href="/news"         class="hover:text-white transition-colors">Новости</a>
+      <a href="/faq"          class="hover:text-white transition-colors">FAQ</a>
+      <a href="/#contact"     class="hover:text-white transition-colors">Контакты</a>
+    </nav>
+    <div class="text-right text-xs text-gray-600 flex flex-col gap-1">
+      <a href="tel:{{ site.LAWYER_PHONE }}" class="hover:text-gold transition-colors">{{ site.LAWYER_PHONE }}</a>
+      <a href="mailto:{{ site.LAWYER_EMAIL }}" class="hover:text-gold transition-colors">{{ site.LAWYER_EMAIL }}</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const menu   = document.getElementById('mobile-menu');
+  burger.addEventListener('click', () => menu.classList.toggle('hidden'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
